@@ -22,7 +22,7 @@ const Detail = () => {
 
   return (
     <>
-      {/* {item && (
+      {item && (
         <>
           <div
             className='banner'
@@ -74,7 +74,7 @@ const Detail = () => {
             </div>
           </div>
         </>
-      )} */}
+      )}
     </>
   );
 };
