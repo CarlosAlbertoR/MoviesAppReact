@@ -1,20 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useHistory, useParams } from 'react-router';
-
-import './movie-grid.scss';
-
 import MovieCard from '../movie-card/MovieCard';
 import Button, { OutlineButton } from '../button/Button';
 import Input from '../input/Input';
-
 import tmdbApi, { category, movieType, tvType } from '../../api/tmdbApi';
+import './MovieGrid.scss';
 
 const MovieGrid = (props) => {
   const [items, setItems] = useState([]);
-
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
-
   const { keyword } = useParams();
 
   useEffect(() => {
@@ -92,7 +87,6 @@ const MovieGrid = (props) => {
 
 const MovieSearch = (props) => {
   const history = useHistory();
-
   const [keyword, setKeyword] = useState(props.keyword ? props.keyword : '');
 
   const goToSearch = useCallback(() => {
