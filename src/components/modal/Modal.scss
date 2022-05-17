@@ -2,7 +2,6 @@
 
 .modal {
   @include flex(center, center);
-  background-color: rgba($color: $black, $alpha: 0.4);
   position: fixed;
   z-index: 100;
   top: 0;
@@ -10,56 +9,43 @@
   right: 0;
   bottom: 0;
   overflow: auto;
+  background-color: rgba($color: $black, $alpha: 0.4);
   opacity: 0;
   visibility: hidden;
-}
 
-&.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-&__content {
-  background-color: $body-bg;
-  opacity: 0;
-  padding: 2rem;
-  position: relative;
-  width: 50%;
-
-  transform: translateY(-250px);
-  -webkit-transform: translateY(-250px);
-  -moz-transform: translateY(-250px);
-  -ms-transform: translateY(-250px);
-  -o-transform: translateY(-250px);
-
-  transition: transform 0.6s ease, opacity 0.6s ease;
-  -webkit-transition: transform 0.6s ease, opacity 0.6s ease;
-  -moz-transition: transform 0.6s ease, opacity 0.6s ease;
-  -ms-transition: transform 0.6s ease, opacity 0.6s ease;
-  -o-transition: transform 0.6s ease, opacity 0.6s ease;
-
-  @include tablet {
-    width: 80%;
+  &.active {
+    opacity: 1;
+    visibility: visible;
   }
 
-  &__close {
-    cursor: pointer;
-    font-size: 1.5rem;
-    position: absolute;
-    right: 5px;
-    top: 5px;
+  &__content {
+    padding: 2rem;
+    background-color: $body-bg;
+    width: 50%;
+    opacity: 0;
+    transform: translateY(-250px);
+    transition: transform 0.6s ease, opacity 0.6s ease;
+    position: relative;
 
-    &:hover {
-      color: $main-color;
+    @include tablet {
+      width: 80%;
+    }
+
+    &__close {
+      position: absolute;
+      right: 5px;
+      top: 5px;
+      font-size: 1.5rem;
+      cursor: pointer;
+
+      &:hover {
+        color: $main-color;
+      }
     }
   }
 
   &.active &__content {
     opacity: 1;
     transform: translateY(0);
-    -webkit-transform: translateY(0);
-    -moz-transform: translateY(0);
-    -ms-transform: translateY(0);
-    -o-transform: translateY(0);
   }
 }

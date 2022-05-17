@@ -10,17 +10,15 @@ import Routes from './config/Routes';
 
 function App() {
   return (
-    <BrowserRouter >
+    <BrowserRouter>
       <Route
-        render={
-          props => (
-            <>
-              <Header {...props} />
-              <Routes />
-              <Footer />
-            </>
-          )
-        }
+        render={(props) => (
+          <>
+            <Header {...props} />
+            <Routes />
+            <Footer />
+          </>
+        )}
       />
     </BrowserRouter>
   );

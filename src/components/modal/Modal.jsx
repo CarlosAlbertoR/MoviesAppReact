@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import './Modal.scss';
 
 const Modal = (props) => {
-  const { active, setActive } = useState(false);
+  const [active, setActive] = useState(false);
 
   useEffect(() => {
     setActive(props.active);
@@ -16,10 +16,14 @@ const Modal = (props) => {
   );
 };
 
-Modal.propTypes = { active: PropTypes.bool, id: PropTypes.string };
+Modal.propTypes = {
+  active: PropTypes.bool,
+  id: PropTypes.string,
+};
 
 export const ModalContent = (props) => {
   const contentRef = useRef(null);
+
   const closeModal = () => {
     contentRef.current.parentNode.classList.remove('active');
     if (props.onClose) props.onClose();
@@ -35,6 +39,8 @@ export const ModalContent = (props) => {
   );
 };
 
-ModalContent.propTypes = { onClose: PropTypes.func };
+ModalContent.propTypes = {
+  onClose: PropTypes.func,
+};
 
 export default Modal;
