@@ -13,11 +13,24 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Install dependencies
-        run: npm install
+      - uses: actions/setup-node@v1 #this installs node and npm for us
+        with:
+          node-version: "18.x"
 
-      - name: Build application
-        run: npm run build
+      - uses: actions/cache@v1 # this allows for re-using node_modules caching, making builds a bit faster.
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Build
+        run: |
+          npm install
+          npm run-script deploy
+
+      - name: Fix permissions
+        run: chmod -R 755 ./build
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.2
