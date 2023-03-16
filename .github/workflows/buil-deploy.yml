@@ -32,7 +32,7 @@ jobs:
       - name: Fix permissions
         run: |
           chmod -R 755 ./build
-          ls dist
+          ls build
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.2
