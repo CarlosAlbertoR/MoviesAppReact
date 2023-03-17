@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { SwiperSlide, Swiper } from "swiper/react";
 import tmdbApi, { category } from "../../api/tmdbApi";
 import MovieCard from "../movie-card/MovieCard";
 import "./MovieList.scss";
+import SwiperCore, { Navigation } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+SwiperCore.use([Navigation]);
 
 const MovieList = (props) => {
   const [items, setItems] = useState([]);
@@ -31,12 +34,22 @@ const MovieList = (props) => {
 
   return (
     <div className="movie-list">
-      <Swiper grabCursor={true} spaceBetween={10} slidesPerView={"auto"}>
+      <Swiper
+        grabCursor={true}
+        spaceBetween={10}
+        slidesPerView={"auto"}
+        navigation={{
+          prevEl: ".swiper-button-prev",
+          nextEl: ".swiper-button-next",
+        }}
+      >
         {items.map((item, i) => (
           <SwiperSlide key={i}>
             <MovieCard item={item} category={props.category} />
           </SwiperSlide>
         ))}
+        <div className="swiper-button-prev"></div>
+        <div className="swiper-button-next"></div>
       </Swiper>
     </div>
   );

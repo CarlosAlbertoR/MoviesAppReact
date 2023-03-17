@@ -1,4 +1,4 @@
-@use '../../scss/' as *;
+@use "../../scss/" as *;
 
 .movie-card {
   position: relative;
@@ -15,10 +15,11 @@
     left: 50%;
     transform: translate(-50%, -50%) scale(0);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    z-index: 1;
   }
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
