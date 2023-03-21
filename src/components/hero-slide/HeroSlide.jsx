@@ -121,6 +121,7 @@ const TrailerModal = (props) => {
           width="100%"
           height="500px"
           title="trailer"
+          allowFullScreen
         ></iframe>
       </ModalContent>
     </Modal>
