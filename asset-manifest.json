@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/MoviesAppReact/static/css/main.b3c0f091.css",
-    "main.js": "/MoviesAppReact/static/js/main.74cf673a.js",
+    "main.js": "/MoviesAppReact/static/js/main.b4792442.js",
     "static/media/boxicons.svg": "/MoviesAppReact/static/media/boxicons.045b05bf2dc119267a90.svg",
     "static/media/footer-bg.jpg": "/MoviesAppReact/static/media/footer-bg.67e95f05e76a8cebf7e2.jpg",
     "static/media/boxicons.eot": "/MoviesAppReact/static/media/boxicons.092b78589f3f53e60030.eot",
@@ -10,10 +10,10 @@
     "static/media/boxicons.woff2": "/MoviesAppReact/static/media/boxicons.8d765747a5588f36ff61.woff2",
     "index.html": "/MoviesAppReact/index.html",
     "main.b3c0f091.css.map": "/MoviesAppReact/static/css/main.b3c0f091.css.map",
-    "main.74cf673a.js.map": "/MoviesAppReact/static/js/main.74cf673a.js.map"
+    "main.b4792442.js.map": "/MoviesAppReact/static/js/main.b4792442.js.map"
   },
   "entrypoints": [
     "static/css/main.b3c0f091.css",
-    "static/js/main.74cf673a.js"
+    "static/js/main.b4792442.js"
   ]
 }
