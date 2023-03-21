@@ -40,4 +40,4 @@ jobs:
           BRANCH: gh-pages
           FOLDER: build
         env:
-          REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
+          REACT_APP_API_KEY: ${{ vars.REACT_APP_API_KEY }}
