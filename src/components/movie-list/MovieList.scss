@@ -45,6 +45,10 @@
     border-top-left-radius: $border-radius;
   }
 
+  .swiper-button-disabled {
+    display: none;
+  }
+
   @media (max-width: 1024px) {
     .swiper-button-next,
     .swiper-button-prev {
