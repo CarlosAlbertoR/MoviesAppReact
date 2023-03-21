@@ -16,7 +16,7 @@ To raise the development environment, the following steps must be followed:
 2. Navigate to the project directory: cd MoviesAppReact
 3. Install dependencies: npm install
 4. Get a TMDb API key [here](https://www.themoviedb.org/settings/api) (you need to be logged in to get your API key).
-5. Create a .env file in the project root directory and add your TMDb API key: REACT_APP_API_KEY=<your API key>
+5. Create a .env file in the project root directory and add your TMDb API key: REACT_APP_API_KEY='your API key'
 6. Start the application: npm start
 7. Open your browser at http://localhost:3000
    
