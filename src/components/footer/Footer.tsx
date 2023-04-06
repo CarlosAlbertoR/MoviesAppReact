@@ -4,7 +4,7 @@ import bg from "../../assets/footer-bg.jpg";
 import logo from "../../assets/movie-ticket.png";
 import "./Footer.scss";
 
-const Footer = () => {
+const Footer: React.FC = () => {
   return (
     <div className="footer" style={{ backgroundImage: `url(${bg})` }}>
       <div className="footer__content container">
