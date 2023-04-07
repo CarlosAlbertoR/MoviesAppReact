@@ -8,14 +8,10 @@ import apiConfig from "../../api/apiConfig";
 import "./HeroSlide.scss";
 import Button, { OutlineButton } from "../button/Button";
 
-interface MovieItem {
-  id: number; title: string; poster_path: string; overview: string; backdrop_path?: string;
- }
-
-const HeroSlide: React.FC = () => {
+const HeroSlide = () => {
   SwiperCore.use([Autoplay]);
 
-  const [movieItems, setMovieItems] = useState<Array<MovieItem>>([]);
+  const [movieItems, setMovieItems] = useState([]);
 
   useEffect(() => {
     const getMovies = async () => {
@@ -60,13 +56,7 @@ const HeroSlide: React.FC = () => {
   );
 };
 
-interface HeroSlideItemProps { 
-  item: MovieItem;
-  className: string;
-}
-
-
-const HeroSlideItem:React.FC<HeroSlideItemProps> = (props) => {
+const HeroSlideItem = (props) => {
   let history = useHistory();
 
   const item = props.item;

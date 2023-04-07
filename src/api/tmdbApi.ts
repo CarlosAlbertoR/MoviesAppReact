@@ -1,51 +1,63 @@
+import { MovieListResponse } from "models/movie-list-response.model";
 import axiosClient from "./axiosClient";
+import { VideoList } from "models/videos-list-response.model";
+
+interface Params {
+  [key: string]: any;
+}
 
 export const category = {
-    movie: 'movie',
-    tv: 'tv'
-}
+  movie: "movie" as "movie",
+  tv: "tv" as "tv",
+};
 
 export const movieType = {
-    upcoming: 'upcoming',
-    popular: 'popular',
-    top_rated: 'top_rated'
-}
+  upcoming: "upcoming" as "upcoming",
+  popular: "popular" as "popular",
+  top_rated: "top_rated" as "top_rated",
+};
 
 export const tvType = {
-    popular: 'popular',
-    top_rated: 'top_rated',
-    on_the_air: 'on_the_air'
-}
+  popular: "popular" as "popular",
+  top_rated: "top_rated" as "top_rated",
+  on_the_air: "on_the_air" as "on_the_air",
+};
 
 const tmdbApi = {
-    getMoviesList: (type, params) => {
-        const url = 'movie/' + movieType[type];
-        return axiosClient.get(url, params);
-    },
-    getTvList: (type, params) => {
-        const url = 'tv/' + tvType[type];
-        return axiosClient.get(url, params);
-    },
-    getVideos: (cate, id) => {
-        const url = category[cate] + '/' + id + '/videos';
-        return axiosClient.get(url, {params: {}});
-    },
-    search: (cate, params) => {
-        const url = 'search/' + category[cate];
-        return axiosClient.get(url, params);
-    },
-    detail: (cate, id, params) => {
-        const url = category[cate] + '/' + id;
-        return axiosClient.get(url, params);
-    },
-    credits: (cate, id) => {
-        const url = category[cate] + '/' + id + '/credits';
-        return axiosClient.get(url, {params: {}});
-    },
-    similar: (cate, id) => {
-        const url = category[cate] + '/' + id + '/similar';
-        return axiosClient.get(url, {params: {}});
-    },
-}
+  getMoviesList: (
+    type: keyof (typeof movieType & typeof tvType) | "similar",
+    params: Params
+  ) => {
+    const url = "movie/" + type;
+    return axiosClient.get<MovieListResponse>(url, params);
+  },
+  getTvList: (
+    type: keyof (typeof movieType & typeof tvType) | "similar",
+    params: Params
+  ) => {
+    const url = "tv/" + type;
+    return axiosClient.get(url, params);
+  },
+  getVideos: (cate: keyof typeof category, id: number) => {
+    const url = category[cate] + "/" + id + "/videos";
+    return axiosClient.get<VideoList>(url, { params: {} });
+  },
+  search: (cate: keyof typeof category, params: Params) => {
+    const url = "search/" + category[cate];
+    return axiosClient.get(url, params);
+  },
+  detail: (cate: keyof typeof category, id: number, params: Params) => {
+    const url = category[cate] + "/" + id;
+    return axiosClient.get(url, params);
+  },
+  credits: (cate: keyof typeof category, id: number) => {
+    const url = category[cate] + "/" + id + "/credits";
+    return axiosClient.get(url, { params: {} });
+  },
+  similar: (cate: keyof typeof category, id: number) => {
+    const url = category[cate] + "/" + id + "/similar";
+    return axiosClient.get(url, { params: {} });
+  },
+};
 
 export default tmdbApi;

@@ -1,6 +1,6 @@
-import React, { MouseEventHandler, ReactNode } from 'react';
-import PropTypes from 'prop-types';
-import './Button.scss';
+import React, { MouseEventHandler, ReactNode } from "react";
+import PropTypes from "prop-types";
+import "./Button.scss";
 
 interface ButtonProps {
   className?: string;
@@ -8,26 +8,23 @@ interface ButtonProps {
   children: ReactNode;
 }
 
-const Button = ({ className = '', onClick, children }: ButtonProps) => {
+const Button = (props: ButtonProps) => {
   return (
-    <button
-      className={`btn ${className}`}
-      onClick={onClick}
-    >
-      {children}
+    <button className={`btn ${props.className}`} onClick={props.onClick}>
+      {props.children}
     </button>
   );
 };
 
-interface OutlineButtonProps extends ButtonProps { }
+interface OutlineButtonProps extends ButtonProps {}
 
-export const OutlineButton = ({ className = '', onClick, children }: OutlineButtonProps) => {
+export const OutlineButton = (props: OutlineButtonProps) => {
   return (
     <Button
-      className={`btn-outline ${className}`}
-      onClick={onClick}
+      className={`btn-outline ${props.className}`}
+      onClick={props.onClick}
     >
-      {children}
+      {props.children}
     </Button>
   );
 };
