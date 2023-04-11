@@ -1,6 +1,6 @@
-import { Video } from "./video.model";
+import { IVideo } from "./video.model";
 
-export interface VideoList {
+export interface IVideoList {
   id: number;
-  results: Array<Video>;
+  results: Array<IVideo>;
 }

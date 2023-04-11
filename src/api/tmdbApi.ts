@@ -1,6 +1,7 @@
-import { MovieListResponse } from "models/movie-list-response.model";
+import { IMovieListResponse } from "models/movie-list-response.model";
 import axiosClient from "./axiosClient";
-import { VideoList } from "models/videos-list-response.model";
+import { IVideoList } from "models/videos-list-response.model";
+import { IDetail } from "models/detail.model";
 
 interface Params {
   [key: string]: any;
@@ -29,7 +30,7 @@ const tmdbApi = {
     params: Params
   ) => {
     const url = "movie/" + type;
-    return axiosClient.get<MovieListResponse>(url, params);
+    return axiosClient.get<IMovieListResponse>(url, params);
   },
 
   getTvList: (
@@ -42,7 +43,7 @@ const tmdbApi = {
 
   getVideos: (cate: keyof typeof category, id: number) => {
     const url = category[cate] + "/" + id + "/videos";
-    return axiosClient.get<VideoList>(url, { params: {} });
+    return axiosClient.get<IVideoList>(url, { params: {} });
   },
 
   search: (cate: keyof typeof category, params: Params) => {
@@ -52,7 +53,7 @@ const tmdbApi = {
 
   detail: (cate: keyof typeof category, id: number, params: Params) => {
     const url = category[cate] + "/" + id;
-    return axiosClient.get(url, params);
+    return axiosClient.get<IDetail>(url, params);
   },
 
   credits: (cate: keyof typeof category, id: number) => {

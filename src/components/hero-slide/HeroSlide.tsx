@@ -6,22 +6,22 @@ import Modal, { ModalContent } from "../modal/Modal";
 import tmdbApi, { category, movieType } from "../../api/tmdbApi";
 import apiConfig from "../../api/apiConfig";
 import Button, { OutlineButton } from "../button/Button";
-import { Movie } from "models/movie.model";
+import { IMovie } from "models/movie.model";
 import "./HeroSlide.scss";
 
 interface HeroSlideItemProps {
-  item: Movie;
+  item: IMovie;
   className: string;
 }
 
 interface TrailerModalProps {
-  item: Movie;
+  item: IMovie;
 }
 
 const HeroSlide = () => {
   SwiperCore.use([Autoplay]);
 
-  const [movieItems, setMovieItems] = useState<Array<Movie>>([]);
+  const [movieItems, setMovieItems] = useState<Array<IMovie>>([]);
 
   useEffect(() => {
     const getMovies = async () => {

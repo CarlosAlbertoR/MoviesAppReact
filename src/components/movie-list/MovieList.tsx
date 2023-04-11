@@ -4,19 +4,19 @@ import SwiperCore, { Navigation } from "swiper";
 import PropTypes from "prop-types";
 import tmdbApi, { category, movieType, tvType } from "../../api/tmdbApi";
 import MovieCard from "../movie-card/MovieCard";
-import { Movie } from "models/movie.model";
+import { IMovie } from "models/movie.model";
 import "./MovieList.scss";
 
 interface MovieListProps {
   category: keyof typeof category;
-  id: number;
+  id?: number;
   type: keyof (typeof movieType & typeof tvType) | "similar";
 }
 
 SwiperCore.use([Navigation]);
 
 const MovieList = (props: MovieListProps) => {
-  const [items, setItems] = useState<Array<Movie>>([]);
+  const [items, setItems] = useState<Array<IMovie>>([]);
 
   useEffect(() => {
     const getList = async () => {
@@ -32,7 +32,8 @@ const MovieList = (props: MovieListProps) => {
             response = await tmdbApi.getTvList(props.type, { params });
         }
       } else {
-        response = await tmdbApi.similar(props.category, props.id);
+        if (props.id)
+          response = await tmdbApi.similar(props.category, props.id);
       }
       setItems((response as any).results);
     };

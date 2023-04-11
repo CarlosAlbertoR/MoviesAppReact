@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import Button from "../button/Button";
 import { category } from "../../api/tmdbApi";
 import apiConfig from "../../api/apiConfig";
-import { Movie } from "models/movie.model";
+import { IMovie } from "models/movie.model";
 import "./MovieCard.scss";
 
 interface MovieCardProps {
   category: keyof typeof category;
-  item: Movie;
+  item: IMovie;
 }
 
 const MovieCard = (props: MovieCardProps) => {

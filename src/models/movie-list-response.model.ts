@@ -1,7 +1,7 @@
-import { Movie } from "./movie.model";
+import { IMovie } from "./movie.model";
 
-export interface MovieListResponse {
-  results: Movie[];
+export interface IMovieListResponse {
+  results: Array<IMovie>;
   page: number;
   total_results: number;
   total_pages: number;

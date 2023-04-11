@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import tmdbApi from "../../api/tmdbApi";
 import apiConfig from "../../api/apiConfig";
-import { Cast } from "models/cast.model";
+import { ICast } from "models/cast.model";
 
 interface CastListProps {
   id: number;
@@ -10,12 +10,12 @@ interface CastListProps {
 
 const CastList = (props: CastListProps) => {
   const { category } = useParams<{ category: "movie" | "tv" }>();
-  const [casts, setCasts] = useState<Array<Cast>>([]);
+  const [casts, setCasts] = useState<Array<ICast>>([]);
 
   useEffect(() => {
     const getCredits = async () => {
-      const res = await tmdbApi.credits(category, props.id);
-      setCasts((res as any).cast.slice(0, 5));
+      const response = await tmdbApi.credits(category, props.id);
+      setCasts((response as any).cast.slice(0, 5));
     };
     getCredits();
   }, [category, props.id]);

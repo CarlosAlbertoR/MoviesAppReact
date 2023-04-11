@@ -5,7 +5,7 @@ import Button, { OutlineButton } from "../button/Button";
 import Input from "../input/Input";
 import tmdbApi, { category, movieType, tvType } from "../../api/tmdbApi";
 import "./MovieGrid.scss";
-import { Movie } from "models/movie.model";
+import { IMovie } from "models/movie.model";
 
 interface MovieGridProps {
   category: keyof typeof category;
@@ -17,7 +17,7 @@ interface MovieSearchProps {
 }
 
 const MovieGrid = (props: MovieGridProps) => {
-  const [items, setItems] = useState<Array<Movie>>([]);
+  const [items, setItems] = useState<Array<IMovie>>([]);
   const [page, setPage] = useState<number>(1);
   const [totalPage, setTotalPage] = useState<number>(0);
   const { keyword } = useParams<{ keyword: string }>();
