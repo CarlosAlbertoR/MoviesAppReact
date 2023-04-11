@@ -1,15 +1,22 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
-import tmdbApi, { category } from "../../api/tmdbApi";
-import MovieCard from "../movie-card/MovieCard";
-import "./MovieList.scss";
-import SwiperCore, { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore, { Navigation } from "swiper";
+import PropTypes from "prop-types";
+import tmdbApi, { category, movieType, tvType } from "../../api/tmdbApi";
+import MovieCard from "../movie-card/MovieCard";
+import { Movie } from "models/movie.model";
+import "./MovieList.scss";
+
+interface MovieListProps {
+  category: keyof typeof category;
+  id: number;
+  type: keyof (typeof movieType & typeof tvType) | "similar";
+}
 
 SwiperCore.use([Navigation]);
 
-const MovieList = (props) => {
-  const [items, setItems] = useState([]);
+const MovieList = (props: MovieListProps) => {
+  const [items, setItems] = useState<Array<Movie>>([]);
 
   useEffect(() => {
     const getList = async () => {
@@ -27,7 +34,7 @@ const MovieList = (props) => {
       } else {
         response = await tmdbApi.similar(props.category, props.id);
       }
-      setItems(response.results);
+      setItems((response as any).results);
     };
     getList();
   }, [props.category, props.id, props.type]);

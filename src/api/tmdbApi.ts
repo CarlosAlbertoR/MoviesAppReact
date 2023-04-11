@@ -31,6 +31,7 @@ const tmdbApi = {
     const url = "movie/" + type;
     return axiosClient.get<MovieListResponse>(url, params);
   },
+
   getTvList: (
     type: keyof (typeof movieType & typeof tvType) | "similar",
     params: Params
@@ -38,22 +39,27 @@ const tmdbApi = {
     const url = "tv/" + type;
     return axiosClient.get(url, params);
   },
+
   getVideos: (cate: keyof typeof category, id: number) => {
     const url = category[cate] + "/" + id + "/videos";
     return axiosClient.get<VideoList>(url, { params: {} });
   },
+
   search: (cate: keyof typeof category, params: Params) => {
     const url = "search/" + category[cate];
     return axiosClient.get(url, params);
   },
+
   detail: (cate: keyof typeof category, id: number, params: Params) => {
     const url = category[cate] + "/" + id;
     return axiosClient.get(url, params);
   },
+
   credits: (cate: keyof typeof category, id: number) => {
     const url = category[cate] + "/" + id + "/credits";
     return axiosClient.get(url, { params: {} });
   },
+
   similar: (cate: keyof typeof category, id: number) => {
     const url = category[cate] + "/" + id + "/similar";
     return axiosClient.get(url, { params: {} });

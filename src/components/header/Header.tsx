@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import "./Header.scss";
 import logo from "../../assets/movie-ticket.png";
+import "./Header.scss";
 
 const headerNav = [
   { display: "Home", path: "/" },
