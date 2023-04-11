@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import "./Header.scss";
 import logo from "../../assets/movie-ticket.png";
+import "./Header.scss";
 
 const headerNav = [
   { display: "Home", path: "/" },
@@ -10,19 +10,19 @@ const headerNav = [
 ];
 
 const Header = () => {
-  const { pathName } = useLocation();
-  const headerRef = useRef(null);
-  const active = headerNav.findIndex((e) => e.path === pathName);
+  const pathName = useLocation().pathname;
+  const headerRef = useRef<HTMLDivElement>(null);
+  const active: number = headerNav.findIndex((e) => e.path === pathName);
 
   useEffect(() => {
-    const shrinkHeader = () => {
+    const shrinkHeader: () => void = () => {
       if (
         document.body.scrollTop > 100 ||
         document.documentElement.scrollTop > 100
       ) {
-        headerRef.current.classList.add("shrink");
+        headerRef.current!.classList.add("shrink");
       } else {
-        headerRef.current.classList.remove("shrink");
+        headerRef.current!.classList.remove("shrink");
       }
     };
     window.addEventListener("scroll", shrinkHeader);

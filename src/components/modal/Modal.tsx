@@ -1,12 +1,18 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, ReactNode } from 'react';
 import PropTypes from 'prop-types';
 import './Modal.scss';
 
-const Modal = (props) => {
+interface ModalProps {
+  active: boolean;
+  id: string;
+  children: ReactNode;
+}
+
+const Modal = (props: ModalProps) => {
   const [active, setActive] = useState(false);
 
   useEffect(() => {
-    setActive(props.active);
+    setActive(!!props.active);
   }, [props.active]);
 
   return (
@@ -19,13 +25,21 @@ const Modal = (props) => {
 Modal.propTypes = {
   active: PropTypes.bool,
   id: PropTypes.string,
+  children: PropTypes.node,
 };
 
-export const ModalContent = (props) => {
-  const contentRef = useRef(null);
+interface ModalContentProps {
+  onClose: () => void;
+  children: ReactNode;
+}
+
+export const ModalContent = (props: ModalContentProps) => {
+  const contentRef = useRef<HTMLDivElement | null>(null);
 
   const closeModal = () => {
-    contentRef.current.parentNode.classList.remove('active');
+    if (contentRef.current !== null) {
+      contentRef.current.classList.remove('active');
+    }
     if (props.onClose) props.onClose();
   };
 

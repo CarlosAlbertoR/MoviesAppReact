@@ -1,18 +1,25 @@
 import React, { useState, useEffect, useRef } from "react";
-
+import { IVideo } from "models/video.model";
 import { useParams } from "react-router";
-
 import tmdbApi from "../../api/tmdbApi";
 
-const VideoList = (props) => {
-  const { category } = useParams();
+interface VideoListProps {
+  id: number;
+}
 
-  const [videos, setVideos] = useState([]);
+interface VideoProps {
+  item: IVideo;
+}
+
+const VideoList = (props: VideoListProps) => {
+  const { category } = useParams<{ category: "movie" | "tv" }>();
+
+  const [videos, setVideos] = useState<IVideo[]>([]);
 
   useEffect(() => {
     const getVideos = async () => {
-      const res = await tmdbApi.getVideos(category, props.id);
-      setVideos(res.results.slice(0, 5));
+      const response = await tmdbApi.getVideos(category, props.id);
+      setVideos((response as any).results.slice(0, 5));
     };
     getVideos();
   }, [category, props.id]);
@@ -26,14 +33,16 @@ const VideoList = (props) => {
   );
 };
 
-const Video = (props) => {
+const Video = (props: VideoProps) => {
   const item = props.item;
 
-  const iframeRef = useRef(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {
-    const height = (iframeRef.current.offsetWidth * 9) / 16 + "px";
-    iframeRef.current.setAttribute("height", height);
+    if (iframeRef.current) {
+      const height = (iframeRef.current.offsetWidth * 9) / 16 + "px";
+      iframeRef.current.setAttribute("height", height);
+    }
   }, []);
 
   return (

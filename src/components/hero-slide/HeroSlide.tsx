@@ -5,13 +5,23 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import Modal, { ModalContent } from "../modal/Modal";
 import tmdbApi, { category, movieType } from "../../api/tmdbApi";
 import apiConfig from "../../api/apiConfig";
-import "./HeroSlide.scss";
 import Button, { OutlineButton } from "../button/Button";
+import { IMovie } from "models/movie.model";
+import "./HeroSlide.scss";
+
+interface HeroSlideItemProps {
+  item: IMovie;
+  className: string;
+}
+
+interface TrailerModalProps {
+  item: IMovie;
+}
 
 const HeroSlide = () => {
   SwiperCore.use([Autoplay]);
 
-  const [movieItems, setMovieItems] = useState([]);
+  const [movieItems, setMovieItems] = useState<Array<IMovie>>([]);
 
   useEffect(() => {
     const getMovies = async () => {
@@ -20,9 +30,10 @@ const HeroSlide = () => {
         const response = await tmdbApi.getMoviesList(movieType.popular, {
           params,
         });
-        setMovieItems(response.results.slice(0, 8));
-      } catch {
-        console.log("error");
+
+        setMovieItems((response as any).results.slice(0, 8));
+      } catch (error) {
+        console.log("error", error);
       }
     };
     getMovies();
@@ -56,30 +67,38 @@ const HeroSlide = () => {
   );
 };
 
-const HeroSlideItem = (props) => {
+const HeroSlideItem = (props: HeroSlideItemProps) => {
   let history = useHistory();
 
   const item = props.item;
 
   const background = apiConfig.originalImage(
+    item.backdrop_path || item.poster_path
+  );
+  console.log(
+    "background",
+    background,
     item.backdrop_path ? item.backdrop_path : item.poster_path
   );
 
   const setModalActive = async () => {
     const modal = document.querySelector(`#modal_${item.id}`);
+    if (modal) {
+      const videos = await tmdbApi.getVideos(category.movie, item.id);
 
-    const videos = await tmdbApi.getVideos(category.movie, item.id);
+      if (videos.data.results.length > 0) {
+        const videSrc =
+          "https://www.youtube.com/embed/" + videos.data.results[0].key;
+        modal
+          ?.querySelector(".modal__content > iframe")
+          ?.setAttribute("src", videSrc);
+      } else {
+        const modalContent = modal?.querySelector(".modal__content");
+        if (modalContent) modalContent.innerHTML = "No trailer";
+      }
 
-    if (videos.results.length > 0) {
-      const videSrc = "https://www.youtube.com/embed/" + videos.results[0].key;
-      modal
-        .querySelector(".modal__content > iframe")
-        .setAttribute("src", videSrc);
-    } else {
-      modal.querySelector(".modal__content").innerHTML = "No trailer";
+      modal?.classList.toggle("active");
     }
-
-    modal.classList.toggle("active");
   };
 
   return (
@@ -108,10 +127,10 @@ const HeroSlideItem = (props) => {
   );
 };
 
-const TrailerModal = (props) => {
+const TrailerModal = (props: TrailerModalProps) => {
   const item = props.item;
-  const iframeRef = useRef(null);
-  const onClose = () => iframeRef.current.setAttribute("src", "");
+  const iframeRef = useRef<HTMLIFrameElement | null>(null);
+  const onClose = () => iframeRef.current?.setAttribute("src", "");
 
   return (
     <Modal active={false} id={`modal_${item.id}`}>
