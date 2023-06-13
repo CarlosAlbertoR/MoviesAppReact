@@ -8,17 +8,26 @@ Movies App React is a web application built with React that displays information
 - Responsive design for optimal user experience on mobile devices
 
 ## Demo
-You can try out the live demo of Movies App React at https://carlosalbertor.github.io/MoviesAppReact/. Enjoy!
+You can try out the live demo of Movies App React [here](https://carlosalbertor.github.io/MoviesAppReact/). Enjoy!
 
 ## Raise the development environment
 To raise the development environment, the following steps must be followed:
-1. Clone this repository: git clone https://github.com/CarlosAlbertoR/MoviesAppReact.git
-2. Navigate to the project directory: cd MoviesAppReact
-3. Install dependencies: npm install
+1. Clone this repository:
+```bash
+    git clone https://github.com/CarlosAlbertoR/MoviesAppReact.git
+``` 
+2. Navigate to the project directory:
+```bash
+    cd MoviesAppReact
+```
+3. Install dependencies: 
+```bash
+    npm install
+```
 4. Get a TMDb API key [here](https://www.themoviedb.org/settings/api) (you need to be logged in to get your API key).
-5. Create a .env file in the project root directory and add your TMDb API key: REACT_APP_API_KEY='your API key'
-6. Start the application: npm start
+5. Create a .env file in the project root directory and add your TMDb API key: REACT_APP_API_KEY='your API key'. See the .env.example
+6. Start the application: 
+```bash
+    npm start
+```
 7. Open your browser at http://localhost:3000
-   
-## Author
-This project was created by Carlos Alberto Rios.
